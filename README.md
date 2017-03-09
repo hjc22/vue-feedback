@@ -1,3 +1,9 @@
+
+[![NPM](https://nodei.co/npm/<package>.png)](https://nodei.co/npm/vue-feedback.png)
+
+[![npm](https://img.shields.io/npm/v/npm.svg)]()
+
+
 # vue-feedback
 
 > Vue v2.0 自定义指令
