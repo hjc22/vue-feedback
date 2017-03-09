@@ -5,11 +5,7 @@
     (global.install = factory());
 }(this, (function () { 'use strict';
 
-// var inBrowser = typeof window !== 'undefined';
-
-
-
-var vueTouchFeedback =function (Vue) {
+var vueTouchFeedback = function (Vue) {
 
         var touchFeedback={
             bind(el,binding){
@@ -109,10 +105,6 @@ function removeClass(el, cls) {
   }
 };
 
-
-console.log(vueTouchFeedback)
-
-console.log(module)
 
 
 })));
