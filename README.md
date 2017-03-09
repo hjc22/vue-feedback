@@ -1,7 +1,7 @@
 
-[![NPM](https://nodei.co/npm/<package>.png)](https://nodei.co/npm/vue-feedback.png)
+[![NPM](https://nodei.co/npm/vue-feedback.png)](https://nodei.co/npm/vue-feedback.png)
 
-[![npm](https://img.shields.io/npm/v/npm.svg)]()
+[![npm](https://img.shields.io/npm/dm/vue-feedback.svg)]()
 
 
 # vue-feedback
