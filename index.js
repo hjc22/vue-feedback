@@ -13,12 +13,8 @@ var vueTouchFeedback = function (Vue) {
                el.addEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
             },
             unbind(el){
-               el.removeEventListener('touchstart',handleStart,false)
-               el.removeEventListener('touchend',handleEnd,false)
-               setStyle(el,{
-                 webkitTransition:'none',
-                 transition:'none'
-               })
+              el.removeEventListener('touchstart',handleStart,false)
+              el.removeEventListener('touchend',handleEnd,false)
             }
         }
 
@@ -31,8 +27,6 @@ return vueTouchFeedback;
 function handleStart(el,cls){
     if(cls) addClass(el,cls.cls);
     else setStyle(el,{
-            webkitTransition:'opacity 0.2s',
-            transition:'opacity 0.2s',
             opacity:'0.2'
          });
 }
