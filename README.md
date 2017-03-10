@@ -1,5 +1,5 @@
 
-[![NPM](https://nodei.co/npm/vue-feedback.png)](https://nodei.co/npm/vue-feedback)
+[![NPM](https://nodei.co/npm/vue-feedback.png)](https://github.com/hjc22/vue-feedback)
 
 [![npm](https://img.shields.io/npm/dm/vue-feedback.svg)]()
 
