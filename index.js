@@ -12,35 +12,56 @@ var vueTouchFeedback = function (Vue) {
                el.addEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
                el.addEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
             },
-            unbind(el){
-              el.removeEventListener('touchstart',handleStart,false)
-              el.removeEventListener('touchend',handleEnd,false)
+            unbind(el,binding){
+               el.removeEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
+               el.removeEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
+               if(isButton(el)){
+                   setStyle(el,{
+                      'webkitTransition':"opacity 0",
+                      'transition':'opacity 0',
+                   })
+               }
             }
         }
-
         Vue.directive('fb',touchFeedback);
-
 };
 
 return vueTouchFeedback;
 
 function handleStart(el,cls){
-    if(cls) addClass(el,cls.cls);
-    else setStyle(el,{
-            opacity:'0.2'
-         });
+    if(cls) return addClass(el,cls.cls);
+
+    if(isButton(el)){
+        setStyle(el,{
+            'webkitTransition':"opacity 0.2s",
+            'transition':'opacity 0.2s',
+             opacity:'0.3'
+        })
+    }
+    else{
+      setStyle(el,{
+              opacity:'0.3'
+           });
+    }
+
 }
 function handleEnd(el,cls){
-    if(cls) removeClass(el,cls.cls);
-    else setStyle(el,{
-           opacity:'1'
-         });
+    if(cls) return removeClass(el,cls.cls);
+      setStyle(el,{
+              opacity:'1'
+      })
 }
 
 function setStyle(el,data){
+    if(!data && !el) return;
     for(var i in data){
         el.style[i]=data[i];
     }
+}
+
+function isButton(el){
+   if(!el) return;
+   return el.nodeName.toLowerCase() == 'button';
 }
 
 function hasClass(el, cls) {
