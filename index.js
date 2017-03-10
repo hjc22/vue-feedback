@@ -5,15 +5,18 @@
     (global.install = factory());
 }(this, (function () { 'use strict';
 
+var locked=false;
 var vueTouchFeedback = function (Vue) {
 
         var touchFeedback={
             bind(el,binding){
                el.addEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
+               el.addEventListener('touchmove',handleEnd.bind(null,el,binding.value),false)
                el.addEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
             },
             unbind(el,binding){
                el.removeEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
+               el.removeEventListener('touchmove',handleEnd.bind(null,el,binding.value),false)
                el.removeEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
                if(isButton(el)){
                    setStyle(el,{
@@ -29,6 +32,7 @@ var vueTouchFeedback = function (Vue) {
 return vueTouchFeedback;
 
 function handleStart(el,cls){
+    locked=true;
     if(cls) return addClass(el,cls.cls);
 
     if(isButton(el)){
@@ -41,14 +45,16 @@ function handleStart(el,cls){
     else{
       setStyle(el,{
               opacity:'0.3'
-           });
+      });
     }
 
 }
 function handleEnd(el,cls){
-    if(cls) return removeClass(el,cls.cls);
+      if(!locked) return;
+      locked=false;
+      if(cls) return removeClass(el,cls.cls);
       setStyle(el,{
-              opacity:'1'
+         opacity:'1'
       })
 }
 
