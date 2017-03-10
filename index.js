@@ -5,7 +5,7 @@
     (global.install = factory());
 }(this, (function () { 'use strict';
 
-var locked=false;
+var locked=false,timer=null;
 var vueTouchFeedback = function (Vue) {
 
         var touchFeedback={
@@ -32,24 +32,28 @@ var vueTouchFeedback = function (Vue) {
 return vueTouchFeedback;
 
 function handleStart(el,cls){
-    locked=true;
-    if(cls) return addClass(el,cls.cls);
-
-    if(isButton(el)){
-        setStyle(el,{
-            'webkitTransition':"opacity 0.2s",
-            'transition':'opacity 0.2s',
-             opacity:'0.3'
-        })
-    }
-    else{
-      setStyle(el,{
+    clearTimeout(timer);
+    timer=setTimeout(function(){
+        locked=true;
+        if(cls) return addClass(el,cls.cls);
+        if(isButton(el)){
+            setStyle(el,{
+                'webkitTransition':"opacity 0.2s",
+                'transition':'opacity 0.2s',
+                 opacity:'0.3'
+            })
+        }
+        else{
+          setStyle(el,{
               opacity:'0.3'
-      });
-    }
+          });
+        }
+    },50)
+
 
 }
 function handleEnd(el,cls){
+      clearTimeout(timer);
       if(!locked) return;
       locked=false;
       if(cls) return removeClass(el,cls.cls);
