@@ -10,14 +10,18 @@ var vueTouchFeedback = function (Vue) {
 
         var touchFeedback={
             bind(el,binding){
-               el.addEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
-               el.addEventListener('touchmove',handleEnd.bind(null,el,binding.value),false)
-               el.addEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
+               var value=binding.value;
+               on(el,'touchstart',handleStart.bind(null,el,value))
+               on(el,'touchmove',handleEnd.bind(null,el,value))
+               on(el,'touchend',handleEnd.bind(null,el,value))
+               on(el,'touchcancel',handleEnd.bind(null,el,value))
             },
             unbind(el,binding){
-               el.removeEventListener('touchstart',handleStart.bind(null,el,binding.value),false)
-               el.removeEventListener('touchmove',handleEnd.bind(null,el,binding.value),false)
-               el.removeEventListener('touchend',handleEnd.bind(null,el,binding.value),false)
+               var value=binding.value;
+               off(el,'touchstart',handleStart.bind(null,el,value))
+               off(el,'touchmove',handleEnd.bind(null,el,value))
+               off(el,'touchend',handleEnd.bind(null,el,value))
+               off(el,'touchcancel',handleEnd.bind(null,el,value))
                if(isButton(el)){
                    setStyle(el,{
                       'webkitTransition':"opacity 0",
@@ -30,6 +34,13 @@ var vueTouchFeedback = function (Vue) {
 };
 
 return vueTouchFeedback;
+
+function on(el,eventName,fn){
+    el.addEventListener(eventName,fn,false);
+}
+function off(el,eventName,fn){
+    el.removeEventListener(eventName,fn,false);
+}
 
 function handleStart(el,cls){
     clearTimeout(timer);
