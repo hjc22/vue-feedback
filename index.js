@@ -9,14 +9,14 @@ var locked=false,timer=null;
 var vueTouchFeedback = function (Vue) {
 
         var touchFeedback={
-            bind(el,binding){
+            bind:function(el,binding){
                var value=binding.value;
                on(el,'touchstart',handleStart.bind(null,el,value))
                on(el,'touchmove',handleEnd.bind(null,el,value))
                on(el,'touchend',handleEnd.bind(null,el,value))
                on(el,'touchcancel',handleEnd.bind(null,el,value))
             },
-            unbind(el,binding){
+            unbind:function(el,binding){
                var value=binding.value;
                off(el,'touchstart',handleStart.bind(null,el,value))
                off(el,'touchmove',handleEnd.bind(null,el,value))
