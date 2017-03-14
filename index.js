@@ -59,7 +59,7 @@ function handleStart(el,cls){
               opacity:'0.3'
           });
         }
-    },50)
+    },20)
 
 
 }
