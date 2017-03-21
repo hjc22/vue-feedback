@@ -22,12 +22,6 @@ var vueTouchFeedback = function (Vue) {
                off(el,'touchmove',handleEnd.bind(null,el,value))
                off(el,'touchend',handleEnd.bind(null,el,value))
                off(el,'touchcancel',handleEnd.bind(null,el,value))
-               if(isButton(el)){
-                   setStyle(el,{
-                      'webkitTransition':"opacity 0",
-                      'transition':'opacity 0',
-                   })
-               }
             }
         }
         Vue.directive('fb',touchFeedback);
@@ -47,14 +41,6 @@ function handleStart(el,cls){
     timer=setTimeout(function(){
         locked=true;
         if(cls) return addClass(el,cls.cls);
-        if(isButton(el)){
-            setStyle(el,{
-                'webkitTransition':"opacity 0.2s",
-                'transition':'opacity 0.2s',
-                 opacity:'0.3'
-            })
-        }
-        else{
           setStyle(el,{
               opacity:'0.3'
           });
@@ -80,10 +66,6 @@ function setStyle(el,data){
     }
 }
 
-function isButton(el){
-   if(!el) return;
-   return el.nodeName.toLowerCase() == 'button';
-}
 
 function hasClass(el, cls) {
   if (!el || !cls) return false;
