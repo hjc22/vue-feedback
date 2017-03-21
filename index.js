@@ -59,7 +59,7 @@ function handleEnd(el,cls){
 }
 
 function setStyle(el,data){
-    if(!data && !el) return;
+    if(!data || !el) return;
     for(var i in data){
         el.style[i]=data[i];
     }
