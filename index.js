@@ -45,10 +45,9 @@ function handleStart(el,cls){
               opacity:'0.3'
           });
         }
-    },20)
-
-
+    ,20)
 }
+
 function handleEnd(el,cls){
       clearTimeout(timer);
       if(!locked) return;
